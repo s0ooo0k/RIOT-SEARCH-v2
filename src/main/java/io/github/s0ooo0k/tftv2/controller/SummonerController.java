@@ -17,7 +17,6 @@ public class SummonerController {
     private final RiotService riotService;
 
     public SummonerController(RiotService riotService) {
-        logger.info("🙀 SummonerController 생성");
         this.riotService = riotService;
     }
 
