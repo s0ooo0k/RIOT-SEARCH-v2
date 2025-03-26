@@ -32,6 +32,7 @@ public class CommunityRepository implements JDBCRepository {
                         rs.getString("rank"),
                         rs.getInt("wins"),
                         rs.getInt("losses"),
+                        rs.getString("image_path"),
                         rs.getTimestamp("post_date")
                 ));
             }
@@ -46,14 +47,15 @@ public class CommunityRepository implements JDBCRepository {
             Statement stmt = conn.createStatement();
             // 쿼리 작성(저장을 위한)
             String query = """
-            INSERT INTO community_posts (summoner_name, tier, `rank`, wins, losses)
-            VALUES ('%s', '%s', '%s', %d, %d)
+            INSERT INTO community_posts (summoner_name, tier, `rank`, wins, losses, image_path)
+            VALUES ('%s', '%s', '%s', %d, %d, '%s')
             """.formatted(
                     post.summonerName(),
                     post.tier(),
                     post.rank(),
                     post.wins(),
-                    post.losses()
+                    post.losses(),
+                    post.imagePath()
             );
             stmt.executeUpdate(query);
         }

@@ -18,6 +18,7 @@
     <div class="card">
         <h3><%= post.summonerName() %></h3>
         <p>티어: <%= post.tier() %> <%= post.rank() %></p>
+        <img src="<%= request.getContextPath() %><%= post.imagePath()%>" alt="img">
         <p>전적: <%= post.wins() %>승 / <%= post.losses() %>패</p>
         <p>작성일: <%= post.postDate() %></p>
     </div>

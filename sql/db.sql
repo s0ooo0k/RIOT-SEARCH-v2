@@ -6,5 +6,6 @@ CREATE TABLE community_posts
     `rank`          VARCHAR(50),
     wins          INT,
     losses        INT,
+    image_path  VARCHAR(255),
     post_date     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

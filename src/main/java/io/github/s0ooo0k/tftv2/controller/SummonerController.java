@@ -38,6 +38,11 @@ public class SummonerController {
             logger.warn("리그 null.");
         }
         model.addAttribute("name", name);
+        model.addAttribute("tag", tag);
+
+        String imagePath = "/resources/static/tier/"+league.tier()+".png";
+        logger.info(imagePath);
+        model.addAttribute("imagePath", imagePath);
         return "result";
     }
 

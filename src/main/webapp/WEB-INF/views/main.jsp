@@ -83,6 +83,7 @@
         %>
         <div class="card">
             <h3><%= post.summonerName() %></h3>
+            <img src="<%= request.getContextPath() %><%= post.imagePath()%>" alt="img">
             <p><%= post.tier() %> <%= post.rank() %></p>
             <p>승: <%= post.wins() %> / 패: <%= post.losses() %></p>
             <small><%= post.postDate() %></small>

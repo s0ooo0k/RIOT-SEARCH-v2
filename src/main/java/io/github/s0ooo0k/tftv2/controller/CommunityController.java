@@ -35,8 +35,9 @@ public class CommunityController {
             @RequestParam("wins") int wins,
              @RequestParam("losses") int losses
     ) throws Exception {
+        String imagePath = "/resources/static/tier/"+tier+".png";
         CommunityPostDTO post = new CommunityPostDTO(
-                0, summonerName, tier, rank, wins, losses, null
+                0, summonerName, tier, rank, wins, losses, imagePath,null
         );
 
         communityRepository.save(post);

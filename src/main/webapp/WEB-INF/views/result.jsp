@@ -63,6 +63,7 @@
   <body>
     <%
       String name = (String) request.getAttribute("name");
+      String tag = (String) request.getAttribute("tag");
       Object league = request.getAttribute("league");
     %>
     <div class="result-container">
@@ -71,12 +72,14 @@
         <div class="result-box fade-in">
           <% if (league != null) { %>
           <h2 class="text-center mb-4">League info</h2>
+            <p>경로 : ${imagePath}</p>
+          <img src="<%= request.getContextPath() %>${imagePath}" alt="Tier Image">
           <p>티어: ${league.tier()} ${league.rank()}</p>
           <p>승: ${league.wins()}  / 패: ${league.losses()}</p>
 
           <form action="<%= request.getContextPath() %>/community/post" method="post">
             <input type="hidden" name="summonerName" value="<%= name %>" />
-            <input type="hidden" name="tier" value=" ${league.tier()}" />
+            <input type="hidden" name="tier" value="${league.tier()}" />
             <input type="hidden" name="rank" value="${league.rank()}" />
             <input type="hidden" name="wins" value="${league.wins()}" />
             <input type="hidden" name="losses" value="${league.losses()}" />

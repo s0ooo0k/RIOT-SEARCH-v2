@@ -9,6 +9,7 @@ public record CommunityPostDTO(
         String rank,
         int wins,
         int losses,
+        String imagePath,
         Timestamp postDate
 ) {
 }
