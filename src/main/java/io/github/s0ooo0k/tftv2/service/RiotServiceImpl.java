@@ -114,7 +114,7 @@ public class RiotServiceImpl implements RiotService {
                     if (participant.get("puuid").asText().equals(puuid)) {
                         int placement = participant.get("placement").asInt();
 
-                        logger.info("순위 {}", placement);// 순위
+                        // logger.info("순위 {}", placement);// 순위
 
                         // 게임 종료 시 챔피언
                         List<String> championIds = new ArrayList<>();
@@ -132,7 +132,7 @@ public class RiotServiceImpl implements RiotService {
                             }
                         }
 
-                        logger.info("championIds {}", championIds);
+                        //logger.info("championIds {}", championIds);
                         // 객체로 리스트에 추가
                         matchSummaries.add(new MatchSummaryDTO(placement, championIds));
                         break;

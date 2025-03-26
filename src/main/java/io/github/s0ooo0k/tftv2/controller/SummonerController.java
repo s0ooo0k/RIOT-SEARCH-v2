@@ -37,7 +37,7 @@ public class SummonerController {
         // match 전적 가져오기
         List<String> matchIds = riotService.getMatchId(puuid);
         List<MatchSummaryDTO> matchHistory = riotService.getMatchSummary(puuid, matchIds);
-        logger.info("🦔🦔🦔🦔🦔 {}", matchHistory);
+        // logger.info("🦔🦔🦔🦔🦔 {}", matchHistory);
 
         if (league != null) {
             logger.info("리그 데이터 - Tier: {}, Rank: {}, Wins: {}, Losses: {}",
