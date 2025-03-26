@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public class CommunityRepository implements JDBCRepository {
-    final Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+    Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
     final String URL = dotenv.get("DB_URL");
     final String USER = dotenv.get("DB_USER");
     final String PASSWORD = dotenv.get("DB_PASSWORD");
@@ -22,7 +22,7 @@ public class CommunityRepository implements JDBCRepository {
         List<CommunityPostDTO> posts = new ArrayList<>();
         try (Connection conn = getConnection(URL, USER, PASSWORD)) {
             Statement stmt = conn.createStatement();
-            String query = "SELECT * FROM accounts ORDER BY account_id";
+            String query = "SELECT * FROM community_posts ORDER BY post_date DESC";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 posts.add(new CommunityPostDTO(
@@ -46,7 +46,7 @@ public class CommunityRepository implements JDBCRepository {
             Statement stmt = conn.createStatement();
             // 쿼리 작성(저장을 위한)
             String query = """
-            INSERT INTO community_posts (summoner_name, tier, rank, wins, losses)
+            INSERT INTO community_posts (summoner_name, tier, `rank`, wins, losses)
             VALUES ('%s', '%s', '%s', %d, %d)
             """.formatted(
                     post.summonerName(),

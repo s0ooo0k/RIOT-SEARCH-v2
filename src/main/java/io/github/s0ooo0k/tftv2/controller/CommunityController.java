@@ -20,9 +20,9 @@ public class CommunityController {
     // 커뮤니티 전체 글 보기
     @GetMapping
     public String root(Model model) throws Exception {
-        List<CommunityPostDTO> accounts = communityRepository.findAll();
-        model.addAttribute("accounts", accounts);
-        return "main";
+        List<CommunityPostDTO> posts = communityRepository.findAll();
+        model.addAttribute("posts", posts);
+        return "community";
     }
 
     // 저장

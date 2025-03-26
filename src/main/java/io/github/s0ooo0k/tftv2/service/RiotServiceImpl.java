@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 @Service
@@ -26,7 +28,9 @@ public class RiotServiceImpl implements RiotService {
     // v1에서 puuid 찾기
     @Override
     public String getPuuid(String name, String tagLine) {
+
         String url = "https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/"+name+"/"+tagLine;
+        logger.info("URL : {}", url);
         try {
             String jsonResponse = HttpClientUtil.callAPI(url);
             return objectMapper.readTree(jsonResponse).get("puuid").asText();

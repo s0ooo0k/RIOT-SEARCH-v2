@@ -1,5 +1,6 @@
 package io.github.s0ooo0k.tftv2.util;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import io.github.s0ooo0k.tftv2.controller.SummonerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +12,12 @@ import java.net.http.HttpResponse;
 
 public class HttpClientUtil {
     private static final HttpClient httpClient = HttpClient.newHttpClient();
-    private static final String RIOT_API_KEY = System.getenv("RIOT_API_KEY");
+    static final Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+    private static final String RIOT_API_KEY = dotenv.get("RIOT_API_KEY");
     private static final Logger logger = LoggerFactory.getLogger(HttpClientUtil.class);
     public static String callAPI(String url) throws Exception {
+
+        logger.info("API: {}", RIOT_API_KEY);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -25,7 +29,9 @@ public class HttpClientUtil {
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
+
         logger.info("응답 코드: {}", response.statusCode());
+
 
         if (response.statusCode() == 200) {
             return response.body();

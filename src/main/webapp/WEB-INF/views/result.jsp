@@ -61,32 +61,47 @@
     </style>
   </head>
   <body>
+    <%
+      String name = (String) request.getAttribute("name");
+      Object league = request.getAttribute("league");
+    %>
     <div class="result-container">
       <div class="container">
-        <h1 class="title fade-in">Summoner Info</h1>
+        <h1 class="title fade-in">소환사 정보</h1>
         <div class="result-box fade-in">
-          <% if (request.getAttribute("league") != null) { %>
+          <% if (league != null) { %>
           <h2 class="text-center mb-4">League info</h2>
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Tier</th>
-                  <th>Rank</th>
-                  <th>Win</th>
-                  <th>lose</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>${league.tier()}</td>
-                  <td>${league.rank()}</td>
-                  <td>${league.wins()}</td>
-                  <td>${league.losses()}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <p>티어: ${league.tier()} ${league.rank()}</p>
+          <p>승: ${league.wins()}  / 패: ${league.losses()}</p>
+
+          <form action="<%= request.getContextPath() %>/community/post" method="post">
+            <input type="hidden" name="summonerName" value="<%= name %>" />
+            <input type="hidden" name="tier" value=" ${league.tier()}" />
+            <input type="hidden" name="rank" value="${league.rank()}" />
+            <input type="hidden" name="wins" value="${league.wins()}" />
+            <input type="hidden" name="losses" value="${league.losses()}" />
+            <button type="submit">자랑하기</button>
+          </form>
+<%--          <div class="table-responsive">--%>
+<%--            <table class="table">--%>
+<%--              <thead>--%>
+<%--                <tr>--%>
+<%--                  <th>Tier</th>--%>
+<%--                  <th>Rank</th>--%>
+<%--                  <th>Win</th>--%>
+<%--                  <th>lose</th>--%>
+<%--                </tr>--%>
+<%--              </thead>--%>
+<%--              <tbody>--%>
+<%--                <tr>--%>
+<%--                  <td>${league.tier()}</td>--%>
+<%--                  <td>${league.rank()}</td>--%>
+<%--                  <td>${league.wins()}</td>--%>
+<%--                  <td>${league.losses()}</td>--%>
+<%--                </tr>--%>
+<%--              </tbody>--%>
+<%--            </table>--%>
+<%--          </div>--%>
           <% } else { %>
           <div class="no-data">
             <h2>리그 정보 없음</h2>
@@ -94,7 +109,7 @@
           </div>
           <% } %>
           <div class="back-button">
-            <a href="/" class="btn btn-primary">돌아가기</a>
+            <a href="${pageContext.request.contextPath}/" class="btn btn-primary">돌아가기</a>
           </div>
         </div>
       </div>

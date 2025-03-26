@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="io.github.s0ooo0k.tftv2.model.dto.CommunityPostDTO" %>
 <html>
   <head>
     <title>Summoner Search</title>
@@ -52,12 +54,12 @@
       <div class="search-box fade-in">
         <h1 class="title">소환사 검색</h1>
         <form action="search" method="get">
-          <div class="form-group">
-            <select name="languages">
-              <option value="lol" name="lol">League of Legend</option>
-              <option value="tft" name="tft">TFT</option>
-            </select>
-          </div>
+<%--          <div class="form-group">--%>
+<%--            <select name="languages">--%>
+<%--              <option value="lol" name="lol">League of Legend</option>--%>
+<%--              <option value="tft" name="tft">TFT</option>--%>
+<%--            </select>--%>
+<%--          </div>--%>
           <div class="form-group">
             <label>Summoner name</label>
             <input type="text" name="name" class="form-control" required />
@@ -70,7 +72,33 @@
         </form>
       </div>
     </div>
+    <div class="container">
+        <%
+            List<CommunityPostDTO> posts = (List<CommunityPostDTO>) request.getAttribute("posts");
+            int count = 0;
 
+            if (posts != null) {
+                for (CommunityPostDTO post : posts) {
+                    if (count++ >= 3) break;  // 최대 3개만 노출
+        %>
+        <div class="card">
+            <h3><%= post.summonerName() %></h3>
+            <p><%= post.tier() %> <%= post.rank() %></p>
+            <p>승: <%= post.wins() %> / 패: <%= post.losses() %></p>
+            <small><%= post.postDate() %></small>
+        </div>
+        <%
+                }
+            }
+        %>
+    </div>
+
+      <div class="community-link">
+        <a href="/community">
+          <button>커뮤니티 전체 보기</button>
+        </a>
+      </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/common.js"></script>
   </body>
