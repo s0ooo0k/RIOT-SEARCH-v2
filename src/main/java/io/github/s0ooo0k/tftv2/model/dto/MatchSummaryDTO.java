@@ -4,6 +4,6 @@ import java.util.List;
 
 public record MatchSummaryDTO(
         int placement, // 순위
-        List<String> championIds;
+        List<String> championImg
 ) {
 }
