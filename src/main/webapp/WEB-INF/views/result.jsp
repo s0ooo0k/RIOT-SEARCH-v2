@@ -69,42 +69,39 @@
     <div class="result-container">
       <div class="container">
         <h1 class="title fade-in">소환사 정보</h1>
-        <div class="result-box fade-in">
-          <% if (league != null) { %>
-          <h2 class="text-center mb-4">League info</h2>
-            <p>경로 : ${imagePath}</p>
-          <img src="<%= request.getContextPath() %>${imagePath}" alt="Tier Image">
-          <p>티어: ${league.tier()} ${league.rank()}</p>
-          <p>승: ${league.wins()}  / 패: ${league.losses()}</p>
 
-          <form action="<%= request.getContextPath() %>/community/post" method="post">
-            <input type="hidden" name="summonerName" value="<%= name %>" />
-            <input type="hidden" name="tier" value="${league.tier()}" />
-            <input type="hidden" name="rank" value="${league.rank()}" />
-            <input type="hidden" name="wins" value="${league.wins()}" />
-            <input type="hidden" name="losses" value="${league.losses()}" />
-            <button type="submit">자랑하기</button>
-          </form>
-<%--          <div class="table-responsive">--%>
-<%--            <table class="table">--%>
-<%--              <thead>--%>
-<%--                <tr>--%>
-<%--                  <th>Tier</th>--%>
-<%--                  <th>Rank</th>--%>
-<%--                  <th>Win</th>--%>
-<%--                  <th>lose</th>--%>
-<%--                </tr>--%>
-<%--              </thead>--%>
-<%--              <tbody>--%>
-<%--                <tr>--%>
-<%--                  <td>${league.tier()}</td>--%>
-<%--                  <td>${league.rank()}</td>--%>
-<%--                  <td>${league.wins()}</td>--%>
-<%--                  <td>${league.losses()}</td>--%>
-<%--                </tr>--%>
-<%--              </tbody>--%>
-<%--            </table>--%>
-<%--          </div>--%>
+          <div class="container mt-3">
+              <div class="alert <%= isError ? "alert-danger" : "alert-success" %> alert-dismissible fade show" role="alert">
+                  <%= message.replace("성공:", "").replace("실패:", "") %>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+          </div>
+          <%
+                  session.removeAttribute("message");
+              }
+          %>
+        <div class="result-box fade-in">
+            <% if (league != null) { %>
+            <h2 class="text-center mb-4">League info</h2>
+            <p>경로 : ${imagePath}</p>
+            <img src="<%= request.getContextPath() %>${imagePath}" alt="Tier Image">
+            <p>티어: ${league.tier()} ${league.rank()}</p>
+            <p>승: ${league.wins()} / 패: ${league.losses()}</p>
+
+            <form action="<%= request.getContextPath() %>/community/post" method="post">
+                <input type="hidden" name="summonerName" value="<%= name %>"/>
+                <input type="hidden" name="tier" value="${league.tier()}"/>
+                <input type="hidden" name="rank" value="${league.rank()}"/>
+                <input type="hidden" name="wins" value="${league.wins()}"/>
+                <input type="hidden" name="losses" value="${league.losses()}"/>
+                <button type="submit">자랑하기</button>
+<%--                추가 ~~~~~~~~--%>
+            </form>
+            <%
+                String message = (String) session.getAttribute("message");
+                if (message != null) {
+                boolean isError = message.startsWith("실패");
+            %>
           <% } else { %>
           <div class="no-data">
             <h2>리그 정보 없음</h2>
@@ -117,6 +114,8 @@
         </div>
       </div>
     </div>
+
+
     <script>
       console.log("JSP에서 리그 데이터 확인 - ${league}");
     </script>

@@ -5,6 +5,7 @@ import io.github.s0ooo0k.tftv2.model.dto.CommunityPostDTO;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ public class CommunityRepository implements JDBCRepository {
         return posts;
     }
 
+
+
     public void save(CommunityPostDTO post) throws Exception {
         // 저장
         try (Connection conn = getConnection(URL, USER, PASSWORD)) {
@@ -59,6 +62,26 @@ public class CommunityRepository implements JDBCRepository {
             );
             stmt.executeUpdate(query);
         }
+    }
+
+    // 중복체크
+    public boolean existPost(CommunityPostDTO post) throws Exception {
+        try (Connection conn = getConnection(URL, USER, PASSWORD)) {
+            // name tier rank 같으면
+            String query = "SELECT COUNT(*) FROM community_posts WHERE summoner_name = ? AND tier = ? AND `rank` = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+                pstmt.setString(1, post.summonerName());
+                pstmt.setString(2, post.tier());
+                pstmt.setString(3, post.rank());
+
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getInt(1) > 0;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 //    public void delete(long id) throws Exception {
