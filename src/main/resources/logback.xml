@@ -7,14 +7,13 @@
         </encoder>
     </appender>
 
-    <logger name="io.github.s0ooo0k" level="DEBUG" additivity="false">
+    <logger name="io.github.s0ooo0k" level="WARN" additivity="false">
         <appender-ref ref="CONSOLE"/>
 
     </logger>
-
-    <root level="INFO">
+    <root level="WARN">
         <appender-ref ref="CONSOLE"/>
-
     </root>
+
 
 </configuration>
