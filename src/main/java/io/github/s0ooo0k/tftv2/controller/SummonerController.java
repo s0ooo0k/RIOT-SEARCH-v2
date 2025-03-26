@@ -37,11 +37,7 @@ public class SummonerController {
         } else {
             logger.warn("리그 null.");
         }
-
-
-        logger.info("getPuuid() 실행 완료 - PUUID: {}", puuid);
         model.addAttribute("name", name);
-
         return "result";
     }
 

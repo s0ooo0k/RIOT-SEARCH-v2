@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.cdimascio.dotenv.Dotenv;
 import io.github.s0ooo0k.tftv2.controller.SummonerController;
 import io.github.s0ooo0k.tftv2.model.dto.LeagueDTO;
 import io.github.s0ooo0k.tftv2.model.dto.SummonerDTO;
@@ -16,8 +17,8 @@ import java.util.Arrays;
 
 @Service
 public class RiotServiceImpl implements RiotService {
-
-    private static final String RIOT_API_KEY = System.getenv("RIOT_API_KEY");
+    static final Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+    private static final String RIOT_API_KEY = dotenv.get("RIOT_API_KEY");
     private static final String RIOT_BASE_URL = "https://kr.api.riotgames.com";
     private final ObjectMapper objectMapper = new ObjectMapper();
     private static final Logger logger = LoggerFactory.getLogger(RiotServiceImpl.class);

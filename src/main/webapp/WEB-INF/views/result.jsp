@@ -1,31 +1,108 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-  <title>소환사 정보</title>
-</head>
-<body>
-<h1>소환사 정보</h1>
-
-<% if (request.getAttribute("league") != null) { %>
-<h2>리그 정보</h2>
-<table>
-  <tr>
-    <th>티어</th>
-    <th>랭크</th>
-    <th>승리</th>
-    <th>패배</th>
-  </tr>
-  <tr>
-    <td>${league.tier}</td>
-    <td>${league.rank}</td>
-    <td>${league.wins}</td>
-    <td>${league.losses}</td>
-  </tr>
-</table>
-<% } else { %>
-<h2>리그 정보 없음</h2>
-<p>해당 소환사의 리그 정보가 없습니다.</p>
-<% } %>
-
-</body>
+  <head>
+    <title>소환사 정보</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Beaufort+for+LOL:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="<%= request.getContextPath() %>/resources/css/common.css"
+      rel="stylesheet"
+    />
+    <style>
+      .result-container {
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+      .result-box {
+        background: rgba(10, 20, 40, 0.9);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 30px rgba(201, 170, 113, 0.3);
+        backdrop-filter: blur(10px);
+        margin-top: 20px;
+      }
+      .title {
+        color: var(--secondary-color);
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        text-align: center;
+      }
+      .table {
+        color: var(--text-color);
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .table th {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        border: none;
+      }
+      .table td {
+        border-color: rgba(201, 170, 113, 0.2);
+      }
+      .no-data {
+        text-align: center;
+        padding: 40px;
+        color: var(--secondary-color);
+        font-size: 1.2rem;
+      }
+      .back-button {
+        margin-top: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="result-container">
+      <div class="container">
+        <h1 class="title fade-in">Summoner Info</h1>
+        <div class="result-box fade-in">
+          <% if (request.getAttribute("league") != null) { %>
+          <h2 class="text-center mb-4">League info</h2>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Tier</th>
+                  <th>Rank</th>
+                  <th>Win</th>
+                  <th>lose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>${league.tier()}</td>
+                  <td>${league.rank()}</td>
+                  <td>${league.wins()}</td>
+                  <td>${league.losses()}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <% } else { %>
+          <div class="no-data">
+            <h2>리그 정보 없음</h2>
+            <p>해당 소환사의 리그 정보가 없습니다.</p>
+          </div>
+          <% } %>
+          <div class="back-button">
+            <a href="/" class="btn btn-primary">돌아가기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      console.log("JSP에서 리그 데이터 확인 - ${league}");
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<%= request.getContextPath() %>/resources/js/common.js"></script>
+  </body>
 </html>

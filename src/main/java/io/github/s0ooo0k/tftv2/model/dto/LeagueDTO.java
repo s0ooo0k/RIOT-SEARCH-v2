@@ -11,8 +11,4 @@ public record LeagueDTO(
         int losses,
         String puuid
 ) {
-    public String getTier() { return tier; }
-    public String getRank() { return rank; }
-    public int getWins() { return wins; }
-    public int getLosses() { return losses; }
 }
