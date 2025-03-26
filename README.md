@@ -1,4 +1,4 @@
-# 🎯 RIOT-SEARCH-v2: TFT Summoner Stats & Community Platform
+# 🎯 TFT SEARCH 
 
 [Riot API 기반 전적 검색 + 커뮤니티 기능이 포함된 웹 플랫폼]
 
