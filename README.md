@@ -23,24 +23,8 @@
 
 ## 🛠️ 기술 스택
 
-### Backend+Frontend
-![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=OpenJDK&logoColor=white)
-![Spring](https://img.shields.io/badge/Spring%20MVC-6DB33F?style=flat&logo=Spring&logoColor=white)
-![JDBC](https://img.shields.io/badge/JDBC-007396?style=flat) 
-![JSP](https://img.shields.io/badge/JSP-007396?style=flat)
-![HTML](https://img.shields.io/badge/HTML-E34F26?style=flat&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS-1572B6?style=flat&logo=css3&logoColor=white)
+![Image](https://github.com/user-attachments/assets/b5e957ba-72fa-41de-9e9c-b03e261d405b)
 
-### API  
-![Riot Games API](https://img.shields.io/badge/Riot%20Games%20API-EB0029?style=flat&logo=riot-games&logoColor=white)
-
-### Database  
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
-
-### Dependencies  
-- Jackson (JSON 파싱)
-- dotenv (환경 변수 설정)
-- SLF4J (로깅)
 
 ----
 ## 📂 프로젝트 구조
